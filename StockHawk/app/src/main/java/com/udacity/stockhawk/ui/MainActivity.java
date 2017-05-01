@@ -1,11 +1,13 @@
 package com.udacity.stockhawk.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,6 +21,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
@@ -47,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onClick(String symbol) {
         Timber.d("Symbol clicked: %s", symbol);
+        Context context = this;
+        Class destinationClass = DetailedActivity.class;
+        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+        intentToStartDetailActivity.putExtra(Intent.EXTRA_UID, symbol);
+        startActivity(intentToStartDetailActivity);
     }
 
     @Override
@@ -183,6 +192,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             setDisplayModeMenuItemIcon(item);
             adapter.notifyDataSetChanged();
             return true;
+        } else if (id == R.id.action_about) {
+            final String appName = getResources().getString(R.string.app_name);
+            new LibsBuilder().withAboutAppName(appName).withLicenseShown(true).withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR).start(this);
         }
         return super.onOptionsItemSelected(item);
     }

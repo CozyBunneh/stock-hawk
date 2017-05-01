@@ -9,4 +9,9 @@
         android:title="@string/action_change_units"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="4"
+        android:title="@string/action_about"/>
+
 </menu>

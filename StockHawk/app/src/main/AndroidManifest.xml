@@ -53,7 +53,7 @@
                 android:resource="@xml/stock_widget_info" />
         </receiver>
 
-        <activity android:name=".DetailedActivity"></activity>
+        <activity android:name=".ui.DetailedActivity"></activity>
     </application>
 
 </manifest>
