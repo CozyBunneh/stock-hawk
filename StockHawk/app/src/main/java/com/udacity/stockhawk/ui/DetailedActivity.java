@@ -11,7 +11,9 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,9 +32,12 @@ import com.udacity.stockhawk.utilities.JsonUtility;
 
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,12 +57,30 @@ public class DetailedActivity extends AppCompatActivity implements LoaderManager
     private static final int INDEX_STOCK_PERCENTAGE_CHANGE = 4;
     private static final int INDEX_STOCK_HISTORY = 5;
 
+    private final DecimalFormat dollarFormatWithPlus;
+    private final DecimalFormat dollarFormat;
+    private final DecimalFormat percentageFormat;
+
     private String mStockSymbol;
     private Stock mStock;
 
     @BindView(R.id.tv_detail_error_message_display) TextView mErrorMessageDisplay;
     @BindView(R.id.pb_detail_loading_indicator) ProgressBar mLoadingIndicator;
-    @BindView(R.id.chart) LineChart chart;
+    @BindView(R.id.tv_symbol) TextView mSymbol;
+    @BindView(R.id.tv_price) TextView mPrice;
+    @BindView(R.id.tv_percentage_change) TextView mPercentageChange;
+    @BindView(R.id.tv_absolute_change) TextView mAbsoluteChange;
+    @BindView(R.id.chart) LineChart mChart;
+
+    public DetailedActivity() {
+        dollarFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
+        dollarFormatWithPlus = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
+        dollarFormatWithPlus.setPositivePrefix("+$");
+        percentageFormat = (DecimalFormat) NumberFormat.getPercentInstance(Locale.getDefault());
+        percentageFormat.setMaximumFractionDigits(2);
+        percentageFormat.setMinimumFractionDigits(2);
+        percentageFormat.setPositivePrefix("+");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +92,7 @@ public class DetailedActivity extends AppCompatActivity implements LoaderManager
         if(savedInstanceState != null && savedInstanceState.containsKey(LIFECYCLE_CALLBACKS_TEXT_KEY)) {
             mStock = savedInstanceState.getParcelable(LIFECYCLE_CALLBACKS_TEXT_KEY);
             mStockSymbol = mStock.getSymbol();
+            initStock();
             initChart();
             showStock();
         } else {
@@ -84,19 +108,31 @@ public class DetailedActivity extends AppCompatActivity implements LoaderManager
     }
 
     private void setLoading() {
-        chart.setVisibility(View.INVISIBLE);
+        mSymbol.setVisibility(View.INVISIBLE);
+        mPrice.setVisibility(View.INVISIBLE);
+        mPercentageChange.setVisibility(View.INVISIBLE);
+        mAbsoluteChange.setVisibility(View.INVISIBLE);
+        mChart.setVisibility(View.INVISIBLE);
         mErrorMessageDisplay.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
     private void showStock() {
-        chart.setVisibility(View.VISIBLE);
+        mSymbol.setVisibility(View.VISIBLE);
+        mPrice.setVisibility(View.VISIBLE);
+        mPercentageChange.setVisibility(View.VISIBLE);
+        mAbsoluteChange.setVisibility(View.VISIBLE);
+        mChart.setVisibility(View.VISIBLE);
         mErrorMessageDisplay.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.INVISIBLE);
     }
 
     private void showError() {
-        chart.setVisibility(View.INVISIBLE);
+        mSymbol.setVisibility(View.INVISIBLE);
+        mPrice.setVisibility(View.INVISIBLE);
+        mPercentageChange.setVisibility(View.INVISIBLE);
+        mAbsoluteChange.setVisibility(View.INVISIBLE);
+        mChart.setVisibility(View.INVISIBLE);
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
         mLoadingIndicator.setVisibility(View.INVISIBLE);
     }
@@ -165,6 +201,7 @@ public class DetailedActivity extends AppCompatActivity implements LoaderManager
             showError();
         } else {
             mStock = data;
+            initStock();
             initChart();
             showStock();
         }
@@ -185,6 +222,24 @@ public class DetailedActivity extends AppCompatActivity implements LoaderManager
         if(mStock != null) {
             outState.putParcelable(LIFECYCLE_CALLBACKS_TEXT_KEY, mStock);
         }
+    }
+
+    private void initStock() {
+        mSymbol.setText(mStock.getSymbol());
+        mPrice.setText(dollarFormat.format(mStock.getPrice()));
+
+        if (mStock.getAbsoluteChange() > 0) {
+            mAbsoluteChange.setBackgroundResource(R.drawable.percent_change_pill_green);
+            mPercentageChange.setBackgroundResource(R.drawable.percent_change_pill_green);
+        } else {
+            mAbsoluteChange.setBackgroundResource(R.drawable.percent_change_pill_red);
+            mPercentageChange.setBackgroundResource(R.drawable.percent_change_pill_red);
+        }
+        String change = dollarFormatWithPlus.format(mStock.getPercentageChange());
+        mAbsoluteChange.setText(change);
+
+        String percentage = percentageFormat.format(mStock.getAbsoluteChange() / 100);
+        mPercentageChange.setText(percentage);
     }
 
     private void initChart() {
@@ -208,18 +263,18 @@ public class DetailedActivity extends AppCompatActivity implements LoaderManager
         dataSet.setValueTextColor(Color.DKGRAY);
 
         LineData lineData = new LineData(dataSet);
-        chart.setFitsSystemWindows(true);
+        mChart.setFitsSystemWindows(true);
 
-        chart.getXAxis().setDrawLabels(false);
-        YAxis left = chart.getAxisLeft();
+        mChart.getXAxis().setDrawLabels(false);
+        YAxis left = mChart.getAxisLeft();
 
         left.setAxisMaximum(Collections.max(yValues));
         left.setAxisMinimum(Collections.min(yValues));
-        chart.getAxisRight().setEnabled(false);
+        mChart.getAxisRight().setEnabled(false);
 
-        chart.setBackgroundColor(Color.WHITE);
-        chart.setData(lineData);
-        chart.invalidate();
+        mChart.setBackgroundColor(Color.WHITE);
+        mChart.setData(lineData);
+        mChart.invalidate();
     }
 
     private List<StockHistory> parseHistory(String historyString) {

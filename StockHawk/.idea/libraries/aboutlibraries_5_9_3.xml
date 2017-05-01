@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="aboutlibraries-5.9.3">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/0e15b314b801da9d6321946beff99031315918d7/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/0e15b314b801da9d6321946beff99031315918d7/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mikepenz/aboutlibraries/5.9.3/1a71adbbf541a0edcb92122a8e3917f228a41ec6/aboutlibraries-5.9.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -23,6 +23,12 @@
         <item name="android:textColor">#D3D3D3</item>
     </style>
 
+    <style name="StockSymbolDetailedTextStyle">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">#D3D3D3</item>
+    </style>
+
     <style name="StockHawkWidgetStyle">
         <item name="android:background">@color/widget_transparent</item>
     </style>
