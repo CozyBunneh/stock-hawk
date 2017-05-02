@@ -6,20 +6,20 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/widget_symbol"
         style="@style/StockHawkWidgetHeaderStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/widget_symbol_margin_top"
         android:text="@string/app_name"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="@dimen/widget_symbol_margin_start" />
 
     <ListView
         android:id="@+id/widget_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginTop="@dimen/widget_list_view_margin_top"
+        android:layout_marginRight="@dimen/widget_list_view_margin_right"
+        android:layout_marginLeft="@dimen/widget_list_view_margin_keft" />
 
 </LinearLayout>

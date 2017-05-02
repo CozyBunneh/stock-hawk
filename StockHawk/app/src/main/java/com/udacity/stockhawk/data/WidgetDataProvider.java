@@ -24,6 +24,8 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     private final DecimalFormat dollarFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
     private final DecimalFormat dollarFormatWithPlus = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
 
+    private static final String SET_BACKGROUND_RESOURCE = "setBackgroundResource";
+
     public WidgetDataProvider(Context context, Intent intent) {
         this.context = context;
         this.intent = intent;
@@ -79,9 +81,9 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         float rawAbsoluteChange = cursor.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE);
 
         if (rawAbsoluteChange > 0) {
-            remoteViews.setInt(R.id.change, "setBackgroundResource", R.drawable.percent_change_pill_green);
+            remoteViews.setInt(R.id.change, SET_BACKGROUND_RESOURCE, R.drawable.percent_change_pill_green);
         } else {
-            remoteViews.setInt(R.id.change, "setBackgroundResource", R.drawable.percent_change_pill_red);
+            remoteViews.setInt(R.id.change, SET_BACKGROUND_RESOURCE, R.drawable.percent_change_pill_red);
         }
 
         remoteViews.setTextViewText(R.id.change,  dollarFormatWithPlus.format(rawAbsoluteChange));

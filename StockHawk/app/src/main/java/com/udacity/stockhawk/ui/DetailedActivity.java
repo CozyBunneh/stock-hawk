@@ -255,7 +255,6 @@ public class DetailedActivity extends AppCompatActivity implements LoaderManager
             yValues.add(y);
             Timber.d("initChart x \"" + x + "\" y \"" + y + "\"");
             entries.add(new Entry(x, y));
-            //entries.add(new Entry(Float.parseFloat(stockHistory.getClose()), Float.parseFloat(stockHistory.getTimeInMillis())));
         }
 
         LineDataSet dataSet = new LineDataSet(entries, mStockSymbol);
@@ -264,6 +263,7 @@ public class DetailedActivity extends AppCompatActivity implements LoaderManager
 
         LineData lineData = new LineData(dataSet);
         mChart.setFitsSystemWindows(true);
+        mChart.getDescription().setEnabled(false);
 
         mChart.getXAxis().setDrawLabels(false);
         YAxis left = mChart.getAxisLeft();

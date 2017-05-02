@@ -14,4 +14,36 @@
     <dimen name="change_horizontal_padding">3dp</dimen>
 
     <dimen name="widget_margin">8dp</dimen>
+
+    <dimen name="detailed_symbol_margin_top">16dp</dimen>
+    <dimen name="detailed_symbol_margin_start">32dp</dimen>
+    <dimen name="detailed_price_margin_top">0dp</dimen>
+    <dimen name="detailed_price_margin_end">32dp</dimen>
+    <dimen name="detailed_percentage_margin_top">8dp</dimen>
+    <dimen name="detailed_percentage_margin_start">0dp</dimen>
+    <dimen name="detailed_absolute_margin_top">8dp</dimen>
+    <dimen name="detailed_absolute_margin_start">0dp</dimen>
+    <dimen name="detailed_chart_width">0dp</dimen>
+    <dimen name="detailed_chart_height">200dp</dimen>
+    <dimen name="detailed_chart_margin_end">8dp</dimen>
+    <dimen name="detailed_chart_margin_start">8dp</dimen>
+    <dimen name="detailed_chart_margin_bottom">32dp</dimen>
+    <dimen name="detailed_chart_margin_top">32dp</dimen>
+    <dimen name="detailed_loading_indicator_width">48dp</dimen>
+    <dimen name="detailed_loading_indicator_height">48dp</dimen>
+    <dimen name="detailed_loading_indicator_margin_top">231dp</dimen>
+    <dimen name="detailed_loading_indicator_margin_start">168dp</dimen>
+    <dimen name="detailed_error_message_width">0dp</dimen>
+    <dimen name="detailed_error_message_margin_bottom">8dp</dimen>
+    <dimen name="detailed_error_message_margin_start">8dp</dimen>
+    <dimen name="detailed_error_message_margin_end">8dp</dimen>
+    <dimen name="detailed_error_message_margin_top">8dp</dimen>
+
+    <dimen name="widget_symbol_margin_top">16dp</dimen>
+    <dimen name="widget_symbol_margin_start">16dp</dimen>
+    <dimen name="widget_list_view_margin_top">16dp</dimen>
+    <dimen name="widget_list_view_margin_right">16dp</dimen>
+    <dimen name="widget_list_view_margin_keft">16dp</dimen>
+    <dimen name="widget_provider_min_height">110dp</dimen>
+    <dimen name="widget_provider_min_width">190dp</dimen>
 </resources>
