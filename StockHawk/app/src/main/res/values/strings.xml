@@ -40,4 +40,18 @@
     <string name="action_about">About</string>
 
     <string name="error">An error occurred. Please try again</string>
+
+    <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
+    <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
+    <string name="aboutLibraries_description_text" translatable="false">Project 3 app for the Udacity course Associate Android Developer Fast Track. Made by: Julia Mattjus</string>
+    <string name="define_Lombok" translatable="false"></string>
+    <string name="library_Lombok_author" translatable="false">The Project Lombok Authors</string>
+    <string name="library_Lombok_authorWebsite" translatable="false">https://projectlombok.org</string>
+    <string name="library_Lombok_libraryName" translatable="false">Project Lombok</string>
+    <string name="library_Lombok_libraryDescription" translatable="false">Project Lombok makes java a spicier language by adding \'handlers\' that know how to build and compile simple, boilerplate-free, not-quite-java code.</string>
+    <string name="library_Lombok_libraryVersion" translatable="false">1.16.12</string>
+    <string name="library_Lombok_libraryWebsite" translatable="false">http://projectlombok.org/</string>
+    <string name="library_Lombok_licenseId" translatable="false">mit</string>
+    <string name="library_Lombok_isOpenSource" translatable="false">true</string>
+    <string name="library_Lombok_repositoryLink" translatable="false">https://github.com/rzwitserloot/lombok</string>
 </resources>
